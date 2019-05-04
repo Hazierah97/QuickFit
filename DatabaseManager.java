@@ -220,6 +220,35 @@ public class DatabaseManager extends  SQLiteOpenHelper{
         return db.insert(TABLE3_NAME, null, contentValues) != -1;
     }
 
+    boolean exercise_entry(String name, String calories, String link, String exercise_id){
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COLUMN4_NAME, name);
+        contentValues.put(COLUMN4_CALORIES, calories);
+        contentValues.put(COLUMN4_LINK, link);
+        contentValues.put(COLUMN4_EXERCISEID, exercise_id);
+
+
+        SQLiteDatabase db = getWritableDatabase();
+        return db.insert(TABLE4_NAME, null, contentValues) != -1;
+    }
+
+
+    boolean recipe_entry(String name, String calories, String link, String recipe_id, String proteins, String total_fat, String carbohydrates){
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COLUMN5_NAME, name);
+        contentValues.put(COLUMN5_CALORIES, calories);
+        contentValues.put(COLUMN5_LINK, link);
+        contentValues.put(COLUMN5_RECIPEID, recipe_id);
+        contentValues.put(COLUMN5_PROTEINS, proteins);
+        contentValues.put(COLUMN5_TOTALFAT, total_fat);
+        contentValues.put(COLUMN5_CARBS, carbohydrates);
+
+        SQLiteDatabase db = getWritableDatabase();
+        return db.insert(TABLE5_NAME, null, contentValues) != -1;
+    }
+
 
     /*
      * READ OPERATION
@@ -240,6 +269,12 @@ public class DatabaseManager extends  SQLiteOpenHelper{
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE1_NAME, null);
     }
+
+    Cursor getExerciseLink(){
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery("SELECT link FROM " + TABLE4_NAME, null);
+    }
+
 
     /*
      * UPDATE OPERATION
